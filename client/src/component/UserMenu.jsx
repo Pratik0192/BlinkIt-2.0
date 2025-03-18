@@ -8,6 +8,7 @@ import { logout } from '../store/userSlice'
 import toast from "react-hot-toast"
 import AxiosToastError from '../utils/AxiosToastError'
 import { HiOutlineExternalLink } from "react-icons/hi"
+import isAdmin from '../utils/isAdmin'
 
 
 const UserMenu = ({close}) => {
@@ -40,17 +41,34 @@ const UserMenu = ({close}) => {
     <div>
       <div className="font-semibold">My Account</div>
       <div className="text-sm items-center flex gap-2">
-        <span className='max-w-52 text-ellipsis line-clamp-1'>{user.name || user.mobile}</span>
+      <span className='max-w-52 text-ellipsis line-clamp-1'>{user.name || user.mobile} <span className='text-medium text-red-600'>{user.role === "ADMIN" ? "(Admin)" : "" }</span></span>
         <Link to={"/dashboard/profile"} className='hover:text-primary-200'> 
           <HiOutlineExternalLink /> 
         </Link> 
       </div>
       <Divider />
       <div className="text-sm grid gap-2">
-        <Link to={"/dashboard/category"} className='px-2 hover:bg-orange-200 py-1'>Category</Link>
-        <Link to={"/dashboard/subcategory"} className='px-2 hover:bg-orange-200 py-1'>Sub Category</Link>
-        <Link to={"/dashboard/uploadproduct"} className='px-2 hover:bg-orange-200 py-1'>Upload Product</Link>
-        <Link to={"/dashboard/product"} className='px-2 hover:bg-orange-200 py-1'>Product</Link>
+        {
+          isAdmin(user.role) && (
+            <Link to={"/dashboard/category"} className='px-2 hover:bg-orange-200 py-1'>Category</Link>
+          )
+        }
+        {
+          isAdmin(user.role) && (
+            <Link to={"/dashboard/subcategory"} className='px-2 hover:bg-orange-200 py-1'>Sub Category</Link>
+          )
+        }
+        {
+          isAdmin(user.role) && (
+            <Link to={"/dashboard/uploadproduct"} className='px-2 hover:bg-orange-200 py-1'>Upload Product</Link>
+          )
+        }
+        {
+          isAdmin(user.role) && (
+            <Link to={"/dashboard/product"} className='px-2 hover:bg-orange-200 py-1'>Product</Link>
+          )
+        }
+        
         <Link to={"/dashboard/myorders"} className='px-2 hover:bg-orange-200 py-1'>My Orders</Link>
         <Link to={"/dashboard/adress"} className='px-2 hover:bg-orange-200 py-1'>Saved Addresses</Link>
         <button onClick={handleLogout} className='text-left px-2 hover:bg-orange-200 py-1'>Log Out</button>
