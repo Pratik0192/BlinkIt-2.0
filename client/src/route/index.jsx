@@ -12,6 +12,10 @@ import Dashboard from "../layout/Dashboard"
 import Profile from "../pages/Profile"
 import MyOrders from "../pages/MyOrders"
 import Adress from "../pages/Adress"
+import Category from "../pages/Category"
+import SubCategory from "../pages/SubCategory"
+import Product from "../pages/Product"
+import UploadProduct from "../pages/UploadProduct"
 
 const router = createBrowserRouter([
   {
@@ -65,6 +69,22 @@ const router = createBrowserRouter([
           {
             path : "adress",
             element : <Adress />
+          },
+          {
+            path: "category",
+            element : <Category />
+          },
+          {
+            path: "subcategory",
+            element: <SubCategory />
+          },
+          {
+            path: "product",
+            element: <Product />
+          },
+          {
+            path: "uploadproduct",
+            element: <UploadProduct />
           }
         ]
       }
